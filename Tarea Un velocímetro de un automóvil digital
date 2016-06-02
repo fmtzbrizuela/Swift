@@ -1,0 +1,45 @@
+//  Tarea: Un velocímetro de un automóvil digital
+// Autor: Francisco Martínez
+
+enum Velocidades : Int {case Apagado = 0,  VelocidadBaja = 20,  VelocidadMedia = 50, VelocidadAlta = 120
+    init(velocidadInicial : Velocidades ){
+        self = velocidadInicial
+    }
+}
+                        
+class Auto {
+// Variable velocidad
+    var velocidad : Velocidades
+// inicializador, pone la velocidad en apagado
+    init(){
+        self.velocidad = Velocidades.Apagado
+    }
+// función cambioDeVelocidad, cambia el valor de velocidad a la siguiente velocidad gradual
+
+    func cambioDeVelocidad( ) -> ( actual : Int, velocidadEnCadena: String){
+        var velCadena : String = ""
+        var velActual : Int = 0
+        if velocidad == Velocidades.Apagado
+            {   velocidad = Velocidades.VelocidadBaja; 
+                velCadena = "Apagado"; velActual = Velocidades.Apagado.rawValue
+        } else if  velocidad == Velocidades.VelocidadBaja
+            {velocidad = Velocidades.VelocidadMedia
+                velCadena = "Velocidad Baja"; velActual = Velocidades.VelocidadBaja.rawValue
+        } else if  velocidad == Velocidades.VelocidadMedia
+            {velocidad = Velocidades.VelocidadAlta
+                velCadena = "Velocidad Media"; velActual = Velocidades.VelocidadMedia.rawValue
+        } else if  velocidad == Velocidades.VelocidadAlta
+            {velocidad = Velocidades.VelocidadMedia
+                velCadena = "Velocidad Alta"; velActual = Velocidades.VelocidadAlta.rawValue
+            }
+        return (velActual, velCadena)
+    }
+}  
+
+//  Prueba
+var auto : Auto = Auto()
+var velActual : ( actual : Int, velocidadEnCadena: String)
+for index in 1...20 {
+    velActual = auto.cambioDeVelocidad()
+    print("\(velActual.0), \(velActual.1)")
+    }
